@@ -1,4 +1,4 @@
-Seccond = 1
+Seccond = 1.0
 Minute = 60 * Seccond
 Hour = 60 * Minute
 Day = 24 * Hour
