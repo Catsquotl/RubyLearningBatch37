@@ -15,3 +15,9 @@
   So what we have is a question to format 123 padded woth zero's to f spaces as digits.
   00123
 =end
+  puts "%05d" % 123
+  puts "% 5d" % 123
+  puts "%#5d" % 123
+  puts "%$5" % 123
+  puts "%+5d" % 123
+  puts "%-5d" % 123
