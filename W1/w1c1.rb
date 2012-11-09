@@ -13,6 +13,3 @@ ages_in_seconds = [979000000, 2158493738, 246144023, 1270166272, 1025600095]
 ages_in_seconds.each do |time|
    puts convert time
 end
-
-
-
