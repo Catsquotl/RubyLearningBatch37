@@ -8,8 +8,11 @@ def multiplication_table num,heading="",decoration=false
      table.push(x * y)
     end
   end
-
-  column_width = table.last.to_s.size
+  if table.last.to_s.size < 2
+    column_width = 2 
+    else
+    column_width = table.last.to_s.size
+  end
   str = ""
 
   until table.empty?
@@ -28,4 +31,5 @@ def multiplication_table num,heading="",decoration=false
     output << str
   end
 end
-puts multiplication_table 20, 'Table times to 9', true
+puts multiplication_table 0,'d',true
+
