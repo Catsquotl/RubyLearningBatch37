@@ -41,7 +41,7 @@ end
 =begin
 doctest: multiplication_table 1,'table', true
 >> multiplication_table 1,'table', true
-=> table\n===\n 1 \n===
+=> "table\n===\n 1 \n==="
 
 doctest:
 >> multiplication_table 0,'table', true
