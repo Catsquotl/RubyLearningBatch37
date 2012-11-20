@@ -1,11 +1,13 @@
-def change_word filename
-  file = File.open("./#{filename}", "r+")
+filename = ARGV[0]
+def change_word text_string
+  change_text_index = text_string.index(ARGV[1])
+  text_string.insert(change_text_index,ARGV[2] + " ")
+end 
+  
+File.open("./#{filename}", "r+"){|file|
   text_string = file.read
-  change_text_index = text_string.index("word")
-  text_string.insert(change_text_index,"inserted ")
   file.rewind
-  file.write text_string
-  file.close
-end
+  change_word text_string
+  file.write text_string}
+  
 
-change_word "test"
