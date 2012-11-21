@@ -1,7 +1,4 @@
 s = 'key=value'
-tmp = s.split('=')
-
-s1 = tmp[0]
-s2 = tmp[1]
+s1,s2 = s.split('=')
 
 puts s1,s2
