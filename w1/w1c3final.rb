@@ -36,4 +36,4 @@ def multiplication_table num,heading="",decoration=false
     output << str 
   end 
 end 
-puts multiplication_table( 0, "table times -2",true)
+puts multiplication_table( 9, "table times 9",true)
