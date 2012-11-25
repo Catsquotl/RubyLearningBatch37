@@ -1,20 +1,21 @@
-def fizzbuzz(range, hash)
-  output = ''
+def fizzbuzz(range, rules = {3 => 'Fizz',5 => 'Buzz'})
+  result = []
   range.each do |num|
   	str = ''
-    hash.each do |divisor,word|
+    rules.each do |divisor,word|
       str << word if num % divisor.to_i == 0
     end
-    str.empty? ? output << "#{num}\n" : output << "*#{str}*\n"
+    str.empty? ? result << num : result << "*#{str}*"
   end
-  output
+  result
 end
 =begin
   doctest : given a range, a hash where {divisor => keyword} str should be added with keyword if number mod divisor == 0
 >> fizzbuzz((1..15),{3 => 'Fizz',5 => 'Buzz',7 => 'Dazz', 11 => 'Kezz'})
-=> "1\n2\n*Fizz*\n4\n*Buzz*\n*Fizz*\n*Dazz*\n8\n*Fizz*\n*Buzz*\n*Kezz*\n*Fizz*\n13\n*Dazz*\n*FizzBuzz*\n"
+=> ["*FizzBuzz*", "*Dazz*", -13, "*Fizz*", "*Kezz*", "*Buzz*", "*Fizz*", -8, "*Dazz*", "*Fizz*", "*Buzz*", -4, "*Fizz*", -2, -1, "*FizzBuzzDazzKezz*", 1, 2, "*Fizz*", 4, "*Buzz*", "*Fizz*", "*Dazz*", 8, "*Fizz*", "*Buzz*", "*Kezz*", "*Fizz*", 13, "*Dazz*", "*FizzBuzz*"]
 =end
 if __FILE__ == $0
-has = {3 => 'Fizz',5 => 'Buzz',7 => 'Dazz', 11 => 'Kezz'}
-puts fizzbuzz((-15..15),has)
+  fizzbuzz((-15..15),{3 => 'Fizz',5 => 'Buzz',7 => 'Dazz', 11 => 'Kezz'}).each do |results|
+    puts results
+  end
 end
