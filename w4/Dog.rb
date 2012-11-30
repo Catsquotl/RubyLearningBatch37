@@ -15,12 +15,20 @@ attr_accessor :name
   end
 
   def chase_cat
-    "#{@name} is chasing a cat"
+    def distance
+      distance = rand(0..10)
+    end
+
+    until distance == 0
+      str = @name + "-" * distance + "cat   "
+      print str
+    end
+    puts "MIAAAAUUW"
   end
 
-  def teach_trick(sym,&block)  
-    self.define_singleton_method(sym,&block)
-   # This works too...
+  def teach_trick(sym,&block) 
+    self.define_singleton_method(sym,&block)  
+   # This works too...   
    #   define_singleton_method(sym) do
    #   instance_eval &block
    #  end
@@ -32,10 +40,13 @@ attr_accessor :name
 
 end
 d = Dog.new('Leo')
+
+d.teach_trick(:hi){ "#{@name} is saying hello" } 
+
 puts d.name
 puts d.bark
 puts d.eat
-puts d.chase_cat
+d.chase_cat
 d.teach_trick(:hi){ "#{@name} is saying hello" } 
 puts d.hi
 d.doanything
