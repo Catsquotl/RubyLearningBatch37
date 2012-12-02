@@ -13,17 +13,24 @@ attr_accessor :name
   def eat
     "#{@name} is eating"
   end
+  def clear_screen
+      system( 'clear') if RUBY_PLATFORM.include?('linux')
+      system('cls')   if RUBY_PLATFORM.include?('mswin')
+  end
 
   def chase_cat
     def distance
-      distance = rand(0..10)
+      distance = rand(11)
     end
-
+    fill = 0 
     until distance == 0
-      str = @name + "-" * distance + "cat   "
+      clear_screen
+      str = '-' * fill + @name + "-" * distance + "cat"
       print str
+      fill += str.length unless fill > 1250 
+      sleep(0.6)
     end
-    puts "MIAAAAUUW"
+    puts "  MIAAAAUUW"
   end
 
   def teach_trick(sym,&block) 
@@ -40,13 +47,11 @@ attr_accessor :name
 
 end
 d = Dog.new('Leo')
-
 d.teach_trick(:hi){ "#{@name} is saying hello" } 
 
+d.chase_cat
 puts d.name
 puts d.bark
 puts d.eat
-d.chase_cat
-d.teach_trick(:hi){ "#{@name} is saying hello" } 
 puts d.hi
 d.doanything
