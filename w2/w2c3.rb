@@ -1,4 +1,2 @@
-puts 5 &lt; 3 && 'yeah' || 'boo' #=&lt; nil
-yeah
-puts 5 < 3 && 'yeah' || 'boo' #=&lt; nil
-boo
+puts 5 < 3 && 'yeah' || 'boo' 
+puts 5 < 3 && 'yeah' || 'boo' 
