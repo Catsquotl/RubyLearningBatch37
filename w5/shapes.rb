@@ -1,38 +1,46 @@
-class Shape
-  attr_accessor :sound_file
+require "green_shoes"
 
-  def initialize(sound_file,*args)
+class Shape < Shoes::Shape
+  attr_accessor :sound_file, :name, :color
+
+  def initialize(*args)
     @name = self.class.to_s
-    @sound_file = sound_file
+    @sound_file = args[0]  || nil
+    @color = args[2]   || nil
   end
 
   def play_sound
-    if @sound_file =~ /\w*\.aif/
-    "Playing .aif file"
-  else
-    "soundfile is not in aif format"
-  end
+    if @sound_file =~ /\w*\.aiff /
+      "Playing .aif file"
+    else
+      "soundfile is not in aif format"
+    end
   end
 
-  def rotate 
-    "#{@name} is rotating around its center."
+  def rotate
+    "animate do |i|
+      clear do
+	rotate 10*i
+          clear do
+	    oval 10,10,50
+          end
+        end
+      end"
   end
 end
 
+
 class Circle < Shape
+  attr_accessor :radius
+  @radius = 50
+  def draw
+    "oval 10,10,50"
+  end
 end
 
 class Triangle < Shape
 end
 
 class Square < Shape
-end
-
-c = Circle.new("Csnd.aif")
-t = Triangle.new("Tsnd.aif")
-s = Square.new("Ssnd.aif")
-[s,t,c].each do |shape|
-  puts shape.rotate
-  puts shape.play_sound
 end
 
