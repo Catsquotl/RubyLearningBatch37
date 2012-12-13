@@ -1,21 +1,29 @@
 require "minitest/autorun"
+require "minitest/reporters"
+MiniTest::Reporters.use! MiniTest::Reporters::SpecReporter.new
+
 require "./shapes"
 
-describe "a Shape should be able to tell its width, length or radius" do
+describe Shape, "a Shape should be able to tell its width, length or radius" do
   before do
-    @circle = Circle.new(nil,nil,'circle.aif',60,10,10)
-    @triangle = Triangle.new(20,50,'triangle.aif')
-    @square  = Square.new(10,50,'shape.aif')
+    @circle = Circle.new(30,30,'circle.aif')
+    @triangle = Triangle.new(60,60,'triangle.aif')
+    @square  = Square.new(60,'shape.aif')
   end
 
-  describe " When asked for its radius" do
-    it "must give it if its class is a circle" do
-      @circle.radius.must_equal 60
-      @triangle.width.must.equal 20
-      @triangle.height.must.equal 50
-      @square.width.must.equal 10
-      @square.height.must.equal 50
+  describe Circle,"When Shape is a circle" do
+    it "must have a radius" do
+      @circle.radius
+    end
+    it "must return a proper radius if width or height is set" do
+      @circle.radius.must_equal 15 
+    end
   end
-end
+
+  describe Square,"when Shape is a Square" do
+    it "must have a width or a height set" do
+      @square.width.must_equal @square.height
+    end
+  end
 end
 
