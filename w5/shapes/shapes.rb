@@ -8,16 +8,12 @@ class Shape
   end
 
   def rotate 
-    animate do |i|
-      clear do
-        rotate 10 * i
-      end
-    end 
+#To be implemented in gui wrapper.
   end
   
   #play_sound relies on SoX play being installed
   def play_sound 
-    system play @sound_file
+    system"play #{@sound_file}"
   end
 
 end
@@ -39,4 +35,5 @@ c = Circle.new(30,'circle.aif')
 t = Triangle.new(20,50,'triangle.aif')
 s = Square.new(50,50,'shape.aif')
 p c,s,t
+c.play_sound
 end
