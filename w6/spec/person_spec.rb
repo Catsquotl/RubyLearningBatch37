@@ -14,6 +14,8 @@ describe Person do
     end
     it "must have an initial balance >= 0" do
       @person.balance.must_equal  0.0
+    end
+    it "must raise an argument error if initial balance is less than 0" do
       initial_balance = Proc.new do
       p = Person.new("Name",-1)
       end
