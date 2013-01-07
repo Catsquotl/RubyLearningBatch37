@@ -52,6 +52,9 @@ class Playfair
       update_index
       update_token
     end
+    if @text.size.odd?
+      @text.concat 'X'
+    end
   end
 end
 
