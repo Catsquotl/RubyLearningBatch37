@@ -7,7 +7,7 @@ describe Playfair do
   ilr_key = 'I love Ruby'
   pf_key = 'Playfair example'
   text = 'Hide the gold in the tree stump'
-  oddtext = 'farmfillet'
+  oddtext = 'RUUUUBY'
   let (:ilr){Playfair.new("#{ilr_key}","#{text}")}
   let (:pf){Playfair.new("#{pf_key}","#{oddtext}")}
 
@@ -24,7 +24,7 @@ describe Playfair do
       ilr.text.must_equal expected
     end
     it "must add an X if there is an odd number of letters after insertion of tokens" do
-      expected = 'FARMFILXLETX'
+      expected = 'RUUXUZUBYX'
       pf.text.must_equal expected
     end
   end
