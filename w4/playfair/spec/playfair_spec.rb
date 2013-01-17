@@ -8,8 +8,8 @@ describe Playfair do
   pf_key = 'Playfair example'
   text = 'Hide the gold in the tree stump'
   oddtext = 'RUUUUBY'
-  let (:ilr){Playfair.new("#{ilr_key}","#{text}")}
-  let (:pf){Playfair.new("#{pf_key}","#{oddtext}")}
+  let(:ilr){Playfair.new("#{ilr_key}","#{text}")}
+  let(:pf){Playfair.new("#{pf_key}","#{oddtext}")}
 
   describe 'Making the grid' do
     it 'must create 5 by 5 grid' do
@@ -28,5 +28,19 @@ describe Playfair do
       pf.text.must_equal expected
     end
   end
+  
+  it "must handele these edges" do
+  ja = Playfair.new('I am not succeding','japan')
+  expected = 'IAPANX'
+  ja.text.must_equal expected
 
+  rl = Playfair.new('key is ok','ruuuuby love')
+  expected = 'RUUXUZUBYLOVEX'
+  rl.text.must_equal expected
+  end
+  it "must get the token in the right order" do 
+  rl = Playfair.new('key is ok','ruuuuby loove')
+  expected = 'RUUXUZUBYLOXOVEX'
+  rl.text.must_equal expected
+  end
 end

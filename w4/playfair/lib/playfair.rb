@@ -4,12 +4,12 @@ class Playfair
   attr_reader :text, :grid
 
   def initialize key, text
-    @token = 'X'
+    @token ||= 'X'
     @index = nil
-    @key = key.upcase
-    @orig_text = text.upcase
+    @key = key
+    @orig_text = text
     make_key_grid
-    format_text @orig_text
+    format_text text.upcase
     finalize @text
   end
 
@@ -27,25 +27,25 @@ class Playfair
 	pair.insert(1, @token)
 	update_token
 	tmp = txt.join
-        @text = tmp
+	@text = tmp
 	self.format_text tmp
       end
     end
   end
 
   def prepare txt
-    text = ''
+    @text = ''
     txt.chars do |ch| 
       if /[[:alpha:]]/ =~ ch
 	ch = 'I' if ch.eql? 'J'
-	text.concat ch	
+	@text.concat ch	
       end
     end
-      text.split(//)
+    @text.split(//)
   end 
 
   def make_key_grid
-    @grid = (self.prepare @key) + BASE_GRID
+    @grid = (self.prepare @key.upcase) + BASE_GRID
     @grid.uniq!
   end
 
@@ -61,6 +61,6 @@ class Playfair
   end
 end 
 if $0 == __FILE__
-  ps = Playfair.new('I Love Ruby', 'RUUUUBY')
+  ps = Playfair.new('I Love Ruby', 'ruuuuby Loove')
   p ps
 end
