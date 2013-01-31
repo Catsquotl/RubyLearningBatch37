@@ -3,21 +3,22 @@ class Tokenizer
   attr_reader :text
 
   def initialize text
-    pair_text text
-    finalize @text
+    @token = 'X'
+    @text = text
+    go
   end
 
   def pair_text tmp
     tmp_ar = tmp.split(//)
     @pairs = []
     @pairs.push tmp_ar.shift(2) until tmp_ar.empty?
-    tokenize
   end
 
-  def tokenize  
-    @pairs.each do |pair|
+  def tokenize enum
+    enum.each_with_index do |pair,index|
       if need_token? pair
-	insert_token pair
+        insert_token pair
+	update_token
 	break
       end
     end
@@ -28,16 +29,13 @@ class Tokenizer
   end
 
   def insert_token pair
-    pair.insert(1, @token) 
-    update_token
-    @text = @pairs.join
-    pair_text @text
+    pair.insert 1,@token
   end
 
   def update_token
     if @token.eql? 'X'
       @token = 'Z'
-    else
+    else    
       @token = 'X'
     end
   end
@@ -46,4 +44,23 @@ class Tokenizer
     @text.concat 'X' if txt.size.odd?
   end
 
+  def run
+    pair_text text
+    tokenize @pairs.to_enum
+    @text = @pairs.join
+  end
+
+  def go
+    tmp = @text
+    self.run
+    if tmp === @text
+      finalize @text
+    else
+      self.go
+    end
+  end
+
 end
+
+t = Tokenizer.new('heel veeeeel dubbbbellllle letters')
+p t
