@@ -1,5 +1,4 @@
 require 'minitest/autorun'
-require 'minitest/colorize'
 require_relative '../lib/playfair'
 
 
@@ -47,7 +46,7 @@ describe Playfair do
 
   it "must test the same thing as above" do
   rl = Playfair.new('key is ok')
-  expected = 'WEEXEZElOXOZOXOVERUXUZUXUBYX'
+  expected = 'WEEXEZELOXOZOXOVERUXUZUXUBYX'
   rl.encrypt('weeee loooove ruuuuby').must_equal expected
 end
 end

@@ -17,8 +17,9 @@ class Tokenizer
   def tokenize enum
     enum.each_with_index do |pair,index|
       if need_token? pair
+        index-1 == @index ? update_token : @token = 'X'
+        @index = index
         insert_token pair
-	update_token
 	break
       end
     end
