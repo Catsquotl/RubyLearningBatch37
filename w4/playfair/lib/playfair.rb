@@ -1,5 +1,6 @@
 require_relative 'tokenizer'
 require_relative 'grid'
+require_relative 'encryptor'
 
 class Playfair
 
@@ -7,10 +8,8 @@ class Playfair
 
   def initialize key
     @key = prepare key
-    puts @key
     @grid = Grid.new(key)
   end
-
 
   def prepare txt
     txt.upcase!
@@ -28,10 +27,7 @@ class Playfair
   def encrypt message
     prep = prepare message
     @tok = Tokenizer.new(prep)
-###
-#    Encyptor.new(grid,tok.pairs)
-    @tok.pairs.each {|pair| pair.join}
-
+    Encryptor.new(grid,@tok.pairs)
     @tok.text
   end
 
