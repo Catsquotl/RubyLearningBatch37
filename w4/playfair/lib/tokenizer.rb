@@ -1,6 +1,6 @@
 class Tokenizer
 
-  attr_reader :text
+  attr_reader :text, :pairs
 
   def initialize text
     @token = 'X'
@@ -54,14 +54,7 @@ class Tokenizer
   def go
     tmp = @text
     self.run
-    if tmp === @text
-      finalize @text
-    else
-      self.go
-    end
+    tmp === @text ? finalize(@text) : self.go
   end
 
 end
-
-t = Tokenizer.new('heel veeeeel dubbbbellllle letters')
-p t

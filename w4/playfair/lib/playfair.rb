@@ -1,22 +1,20 @@
 require_relative 'tokenizer'
+require_relative 'grid'
 
 class Playfair
-  BASE_GRID = ('A'...'J').to_a + ('K'..'Z').to_a
 
   attr_reader :text, :grid
 
   def initialize key
-    make_key_grid key
+    @key = prepare key
+    puts @key
+    @grid = Grid.new(key)
   end
 
-  def make_key_grid key
-    @key = prepare key
-    @grid = @key.split(//) + BASE_GRID
-    @grid.uniq!
-  end
 
   def prepare txt
     txt.upcase!
+    txt.gsub!(/\s+/,"")
     text = ''
     txt.chars do |ch| 
       if /[[:alpha:]]/ =~ ch
@@ -28,10 +26,13 @@ class Playfair
   end 
 
   def encrypt message
-    @text = prepare message
-    t = Tokenizer.new(@text)
-    t.text
+    prep = prepare message
+    @tok = Tokenizer.new(prep)
+###
+#    Encyptor.new(grid,tok.pairs)
+    @tok.pairs.each {|pair| pair.join}
+
+    @tok.text
   end
 
 end
-
