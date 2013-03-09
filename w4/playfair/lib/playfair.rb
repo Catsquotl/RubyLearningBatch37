@@ -1,34 +1,35 @@
-require_relative 'tokenizer'
-require_relative 'grid'
-require_relative 'encryptor'
-
 class Playfair
 
-  attr_reader :text, :grid
+  attr_reader :text, :grid, :pairs, :prep_text , :tok
 
   def initialize key
     @key = prepare key
     @grid = Grid.new(key)
   end
 
+  def encrypt message
+    @tok = Tokenizer.new( prepare message)
+    @pairs = tok.pairs
+    tok.text
+  end
+
+  def decrypt message
+  end
+
+  private
+
   def prepare txt
     txt.upcase!
     txt.gsub!(/\s+/,"")
     text = ''
-    txt.chars do |ch| 
+    txt.chars do |ch|
       if /[[:alpha:]]/ =~ ch
-	ch = 'I' if ch.eql? 'J'
-	text.concat ch	
+        ch = 'I' if ch.eql? 'J'
+        text.concat ch
       end
     end
-    text
-  end 
-
-  def encrypt message
-    prep = prepare message
-    @tok = Tokenizer.new(prep)
-    Encryptor.new(grid,@tok.pairs)
-    @tok.text
+    @prep_text = text
   end
-
 end
+
+

@@ -1,12 +1,12 @@
-require_relative 'spec_helper'
-require_relative '../lib/playfair'
+require_relative 'test_helper'
+load '../lib/helper.rb'
 
 
 describe Playfair do
   ilr_key = 'I love Ruby'
   pf_key = 'Playfair example'
   text = 'Hide the gold in the tree stump'
-  oddtext = 'RUUUUBY'
+  oddtext = 'RUUUUBY' 
   let(:ilr){Playfair.new("#{ilr_key}")}
   let(:pf){Playfair.new("#{pf_key}")}
 
@@ -49,4 +49,5 @@ describe Playfair do
     expected = 'WEEXEZELOXOZOXOVERUXUZUXUBYX'
     rl.encrypt('weeee loooove ruuuuby').must_equal expected
   end
+
 end
